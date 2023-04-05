@@ -16,7 +16,6 @@ public class Main {
     public static void main(String[] args) {
 
         jdbcImp = new JdbcImp();
-
 //        scanner = new  Scanner(System.in);
 //        Student student = new Student();
 //        System.out.println("Enter Name: ");
@@ -88,7 +87,7 @@ public class Main {
         }
     }
     private static void deleteByIDStu(){
-        int id=8;
+        int id=13;
         try(Connection connection= jdbcImp.dataSource().getConnection()){
             PreparedStatement preparedStatement= connection.prepareStatement("DELETE FROM student WHERE id = ?");
             preparedStatement.setInt(1,id);
@@ -102,17 +101,13 @@ public class Main {
             e.printStackTrace();
         }
     }
-    private static void selectByIDStudent(){
-        JdbcImp jdbcImp = new JdbcImp();
+    private static void selectByIDStudent(Integer id){
         try (Connection connection = jdbcImp.dataSource().getConnection()){
             String selectBYIDSql ="SELECT * FROM student WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(selectBYIDSql);
-            int id = 2;
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
-            ResultSetMetaData metaData = resultSet.getMetaData();
             while (resultSet.next()) {
-
                 int resultId = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String gender = resultSet.getString("gender");
